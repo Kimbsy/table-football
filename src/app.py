@@ -1,5 +1,6 @@
 from gpio_handler import GPIO_handler
 from announcer import Announcer
+import time
 
 class App:
 
@@ -8,12 +9,13 @@ class App:
   """
 
   def __init__(self):
-    self.GPIO_handler = new GPIO_handler()
-    self.announcer    = new Announcer()
+    self.GPIO_handler = GPIO_handler()
+    self.announcer    = Announcer()
     self.scores       = [0, 0]
     self.paused       = False
 
   def start(self):
     while not self.paused:
-      if self.GPIO_handler.check_for_goals(self)
-        announcer.announce(self)
+      if self.GPIO_handler.check_for_goals(self):
+        self.announcer.announce(self)
+        time.sleep(1)

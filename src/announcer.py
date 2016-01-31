@@ -3,8 +3,5 @@ class Announcer:
   scores.
   """
 
-  def __init__(self, ):
-    self.scores = scores;
-
   def announce(self, app):
     print(str(app.scores[0]) + ' - ' + str(app.scores[1]))

@@ -1,5 +1,5 @@
 from app import App
 
-app = new App()
+app = App()
 
 app.start();

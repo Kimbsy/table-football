@@ -1,4 +1,8 @@
 # table-football
 
-RPi.GPIO documentation:
-http://sourceforge.net/p/raspberry-gpio-python/wiki/Examples/
+Table football goal line technology project for Ranpberry Pi.
+
+To run:
+```bash
+./build.sh
+```

@@ -1,45 +1,55 @@
 import RPi.GPIO as GPIO
-import time
 
 class GPIO_handler:
 
   """The GPIO_handler class is responsible for checking IR sensors and reset
   button inputs as well as setting LED outputs and updating the App's scores
   appropriately.
+
+  RPi.GPIO documentation:
+  http://sourceforge.net/p/raspberry-gpio-python/wiki/Examples/
   """
 
   def __init__(self):
 
     # Define GPIO pin variables
-    led_1 = 8
-    led_2 = 12
-    sensor_1 = 10
-    sensor_2 = 7
-    reset = 26
+    self.led_1    = 8
+    self.led_2    = 12
+    self.sensor_1 = 10
+    self.sensor_2 = 7
+    self.reset    = 26
 
     # Set appropriate pin modes
-    GPIO.setup(led_1, GPIO.OUT)
-    GPIO.setup(led_2, GPIO.OUT)
-    GPIO.setup(sensor_1, GPIO.IN)
-    GPIO.setup(sensor_2, GPIO.IN)
-    GPIO.setup(reset, GPIO.IN)
+    GPIO.setup(self.led_1, GPIO.OUT)
+    GPIO.setup(self.led_2, GPIO.OUT)
+    GPIO.setup(self.sensor_1, GPIO.IN)
+    GPIO.setup(self.sensor_2, GPIO.IN)
+    GPIO.setup(self.reset, GPIO.IN)
 
-  def beam_broken(sensor):
+  def beam_broken(self, sensor):
     return not GPIO.input(sensor)
 
-  def check_for_goals(app):
-    if self.beam_broken(sensor_1):
-      GPIO.output(led_1, True)
+  def reset_pressed(self):
+    return not GPIO.input(self.reset)
+
+  def check_for_goals(self, app):
+    if self.beam_broken(self.sensor_1):
+      GPIO.output(self.led_1, True)
       app.scores[0] = app.scores[0] + 1
+      return True
     else:
-      GPIO.output(led_1, False)
+      GPIO.output(self.led_1, False)
 
-    if self.beam_broken(sensor_2):
-      GPIO.output(led_2, True)
+    if self.beam_broken(self.sensor_2):
+      GPIO.output(self.led_2, True)
       app.scores[1] = app.scores[1] + 1
+      return True
     else:
-      GPIO.output(led_2, False)
+      GPIO.output(self.led_2, False)
 
-    if not GPIO.input(reset):
+    if self.reset_pressed():
       app.scores[0] = 0
       app.scores[1] = 0
+      return True
+
+    return False
