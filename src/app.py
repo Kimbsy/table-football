@@ -20,14 +20,16 @@ class App:
       if self.GPIO_handler.check_for_goals(self):
 
         # Check if a team has won.
-        if max(self.scores) >= 10:
+        if max(self.scores) >= 3:
           self.announcer.declare_winner(self)
-          self.reset_scores()
+          self.reset_scores(False)
         else:
           self.announcer.announce_goal(self)
+          # wait a second.
+          time.sleep(1)
 
-        # wait a second.
-        time.sleep(1)
-
-  def reset_scores(self):
+  def reset_scores(self, announce):
     self.scores = [0, 0]
+    if announce:
+      self.announcer.announce_reset()
+    time.sleep(1)

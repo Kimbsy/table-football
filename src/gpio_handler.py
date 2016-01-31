@@ -50,8 +50,6 @@ class GPIO_handler:
       GPIO.output(self.led_2, False)
 
     if self.reset_pressed():
-      app.scores[0] = 0
-      app.scores[1] = 0
-      return True
+      app.reset_scores(True)
 
     return False
