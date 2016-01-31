@@ -16,6 +16,18 @@ class App:
 
   def start(self):
     while not self.paused:
+      # Wait for a goal to be scored.
       if self.GPIO_handler.check_for_goals(self):
-        self.announcer.announce(self)
+
+        # Check if a team has won.
+        if max(self.scores) >= 10:
+          self.announcer.declare_winner(self)
+          self.reset_scores()
+        else:
+          self.announcer.announce_goal(self)
+
+        # wait a second.
         time.sleep(1)
+
+  def reset_scores(self):
+    self.scores = [0, 0]

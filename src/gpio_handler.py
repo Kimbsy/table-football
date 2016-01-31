@@ -12,14 +12,14 @@ class GPIO_handler:
 
   def __init__(self):
 
-    # Define GPIO pin variables
+    # Define GPIO pin variables.
     self.led_1    = 8
     self.led_2    = 12
     self.sensor_1 = 10
     self.sensor_2 = 7
     self.reset    = 26
 
-    # Set appropriate pin modes
+    # Set appropriate pin modes.
     GPIO.setup(self.led_1, GPIO.OUT)
     GPIO.setup(self.led_2, GPIO.OUT)
     GPIO.setup(self.sensor_1, GPIO.IN)
@@ -33,6 +33,7 @@ class GPIO_handler:
     return not GPIO.input(self.reset)
 
   def check_for_goals(self, app):
+    # Check sensor_1.
     if self.beam_broken(self.sensor_1):
       GPIO.output(self.led_1, True)
       app.scores[0] = app.scores[0] + 1
@@ -40,6 +41,7 @@ class GPIO_handler:
     else:
       GPIO.output(self.led_1, False)
 
+    # Check sensor_2.
     if self.beam_broken(self.sensor_2):
       GPIO.output(self.led_2, True)
       app.scores[1] = app.scores[1] + 1
