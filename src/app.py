@@ -20,7 +20,7 @@ class App:
       if self.GPIO_handler.check_for_goals(self):
 
         # Check if a team has won.
-        if max(self.scores) >= 3:
+        if max(self.scores) >= 10:
           self.announcer.declare_winner(self)
           self.reset_scores(False)
         else:
