@@ -8,7 +8,7 @@ class Announcer:
   """
 
   def __init__(self):
-    self.teams = ['team 1', 'team 2']
+    self.teams = ['silver', 'black']
 
   def announce_goal(self, app):
     phrase = self.create_phrase(app.scores)
@@ -28,7 +28,7 @@ class Announcer:
     self.output('game reset')
 
   def output(self, phrase):
-    # self.speak(phrase)
+    self.speak(phrase)
     self.echo(phrase)
 
   def speak(self, phrase):
